@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Inscription - Super Site{% endblock %} 
+
+{% block body %}
+
+{% include 'layout/header.html.twig' %}
+
+
+<main class="flex items-center justify-center">
+  <form
+    action=""
+    class="flex flex-col justify-center items-center border-2 border-cyan-300 px-10 py-2"
+  >
+    <label for="surname" class="flex flex-col"
+      >Saisir votre nom
+      <input
+        class="border-2 border-cyan-300"
+        type="text"
+        id="surname"
+        name="surname"
+        required
+        aria-required="true"
+      />
+    </label>
+    <label for="name" class="flex flex-col"
+      >Saisir votre prénom
+      <input
+        class="border-2 border-cyan-300"
+        type="text"
+        id="name"
+        name="name"
+        required
+        aria-required="true"
+      />
+    </label>
+    <label for="email" class="flex flex-col"
+      >Saisir votre email
+      <input
+        class="border-2 border-cyan-300"
+        type="email"
+        id="email"
+        name="email"
+        required
+        aria-required="true"
+      />
+    </label>
+    <label for="password" class="flex flex-col"
+      >Saisir votre password
+      <input
+        class="border-2 border-cyan-300"
+        type="password"
+        id="password"
+        name="password"
+        required
+        aria-required="true"
+      />
+    </label>
+    <button class="self-end border-2 border-cyan-300 px-3 py-1 my-2">
+      Ajouter
+    </button>
+  </form>
+</main>
+{% include 'layout/footer.html.twig' %} 
+{% endblock %}

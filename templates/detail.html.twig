@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %} {% block title %}Article - Super Site{% endblock
+%} {% block body %} {% include 'layout/header.html.twig' %}
+
+<main class="flex items-center justify-center">
+  <article class="flex flex-col border-2 border-cyan-300 p-4 max-w-[50%] gap-4">
+    <header>Titre</header>
+    <section class="border-2 border-cyan-300 p-4">
+      <p class="">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt
+        praesentium accusantium beatae porro ex facere nam sint dignissimos modi
+        dolores nulla mollitia sapiente deserunt, dolorem delectus fugit
+        voluptatem qui debitis!
+      </p>
+    </section>
+    <footer class="flex justify-between">
+      <div>
+        <p>Auteur : <strong>nom prenom</strong></p>
+      </div>
+      <div>
+        <p>Date : <strong>01/01/2025</strong></p>
+      </div>
+    </footer>
+  </article>
+</main>
+{% include 'layout/footer.html.twig' %} {% endblock %}
