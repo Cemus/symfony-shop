@@ -27,7 +27,7 @@ class CalculatorController extends AbstractController
                     $result = $nbr1 * $nbr2;
                     break;
                 case 'div':
-                    if($nbr2 === 0) {
+                    if($nbr2 == 0) {
                         $errorMessage = "Division par zéro impossible";
                     }else{
                         $result = $nbr1 / $nbr2;
