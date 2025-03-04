@@ -38,23 +38,7 @@ class CalculatorController extends AbstractController
                     break;
             }
         }
-        switch ($operator){
-            case "add":
-                $operator = "+";
-                break;
-            case "sous":
-                $operator = "-";
-                break;
-            case "multi":
-                $operator = "*";
-                break;
-            case "div":
-                $operator = "/";
-                break;
-            default:
-                $operator = "";
-                break;
-        }
+
         return $this->render('calculator.html.twig', [
             "nbr1" => $nbr1,
             "nbr2" => $nbr2,

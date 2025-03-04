@@ -5,8 +5,24 @@
 {% block body %}
 
 <main class="flex flex-col items-center justify-center gap-2">
-    <h3>Résultat du calcul de {{nbr1}} {{operator}} {{nbr2}} :</h3>
+    <h3>Votre calcul :</h3>
+    <p>
+    {{nbr1}}
 
+    {% if operator == "add" %}
+        <span>+</span>
+    {% elseif operator == "multi" %}
+        <span>*</span>
+    {% elseif operator == "sous" %}
+        <span>-</span>
+    {% elseif operator == "div" %}
+        <span>/</span>
+    {% else %}
+        <span>???</span>
+    {% endif %}
+
+    {{nbr2}}
+    </p>
     {% if errorMessage != "" %}
         <p class="p-1 text-white px-2 rounded-md bg-red-500">{{errorMessage}}</p>
     {% else %}
