@@ -8,7 +8,7 @@
     <h3>Résultat du calcul de {{nbr1}} {{operator}} {{nbr2}} :</h3>
 
     {% if errorMessage != "" %}
-        <p class="p-1 text-white bg-red-500">{{errorMessage}}</p>
+        <p class="p-1 text-white px-2 rounded-md bg-red-500">{{errorMessage}}</p>
     {% else %}
         <p class="bg-green-500 text-white px-4 py-2 rounded-full">{{result}}</p>
     {% endif %}
