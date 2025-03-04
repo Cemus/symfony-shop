@@ -57,7 +57,7 @@ class CalculatorController extends AbstractController
         }
         return $this->render('calculator.html.twig', [
             "nbr1" => $nbr1,
-            "nbr2" => $nbr1,
+            "nbr2" => $nbr2,
             "operator" => $operator,
             "result" => $result,
             "errorMessage" => $errorMessage,
