@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %} {% block title %}Comptes - Super Site{% endblock
+%} {% block body %}
+
+<main class="grid grid-cols-3 gap-2 p-2">
+  {% for account in accounts %}
+  <article
+    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
+  >
+    <header>
+      <h2>
+        <span>{{ account.firstname }}</span> <span>{{ account.lastname }}</span>
+      </h2>
+      <p>Son id est {{ account.id }}</p>
+    </header>
+
+    <footer class="flex justify-end">
+      <p>
+        Email : <span>{{ account.email }}</span>
+      </p>
+    </footer>
+  </article>
+  {% endfor %}
+</main>
+{% endblock %}
