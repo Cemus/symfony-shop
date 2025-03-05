@@ -2,130 +2,28 @@
 %} {% block body %}
 
 <main class="grid grid-cols-3 gap-2 p-2">
+  {% for article in articles %}
   <article
     class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
   >
     <header>
-      <h2>Titre</h2>
-      <p>Description</p>
+      <h2>
+        {{ article.title }} <span>({{ article.id }})</span>
+      </h2>
+      <p>{{ article.content }}</p>
     </header>
 
     <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
+      <p>
+        <span>{{ article.author.firstname }} </span>
+        <span>{{ article.author.lastname }} </span>
+      </p>
+      <p>
+        {{ article.createAt |date("m/d/Y")  }}
+      </p>
     </footer>
   </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
-
-  <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
-  >
-    <header>
-      <h2>Titre</h2>
-      <p>Description</p>
-    </header>
-
-    <footer class="flex justify-between">
-      <p>Auteur</p>
-      <p>Date 01/01/2025</p>
-    </footer>
-  </article>
+  {% endfor %}
 </main>
+
 {% endblock %}
