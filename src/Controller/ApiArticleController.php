@@ -23,4 +23,15 @@ class ApiArticleController extends AbstractController
             ['groups' => 'article:read']
         );
     }
+    #[Route('/api/articles/{id}', name: 'api_article_one')]
+
+    public function getArticleById($id): Response
+    {
+        return $this->json(
+            $this->articleRepository->findOneBy(['id' => $id]),
+            200,
+            [],
+            ['groups' => ['article:read', 'article:id']]
+        );
+    }
 }
