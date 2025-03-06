@@ -4,23 +4,34 @@
 <main class="grid grid-cols-3 gap-2 p-2">
   {% for article in articles %}
   <article
-    class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full"
+    class="flex flex-col justify-between border-2 border-cyan-300 p-2 gap-2"
   >
-    <header>
+    <header class="text-center">
       <h2>
         {{ article.title }} <span>({{ article.id }})</span>
       </h2>
-      <p>{{ article.content }}</p>
     </header>
+    <section>
+      <p>{{ article.content }}</p>
+    </section>
 
-    <footer class="flex justify-between">
-      <p>
-        <span>{{ article.author.firstname }} </span>
-        <span>{{ article.author.lastname }} </span>
-      </p>
-      <p>
-        {{ article.createAt |date("m/d/Y")  }}
-      </p>
+    <footer class="flex flex-col justify-between gap-1">
+      <div class="flex justify-between">
+        <p>
+          <span>{{ article.author.firstname }} </span>
+          <span>{{ article.author.lastname }} </span>
+        </p>
+
+        <p>
+          {{ article.createAt |date("m/d/Y")  }}
+        </p>
+      </div>
+      <p class="text-center">Categories :</p>
+      <ul>
+        {% for cat in article.categories %}
+        <li>{{ cat.name }}</li>
+        {% endfor %}
+      </ul>
     </footer>
   </article>
   {% endfor %}
