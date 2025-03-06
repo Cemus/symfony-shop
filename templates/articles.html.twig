@@ -23,15 +23,17 @@
         </p>
 
         <p>
-          {{ article.createAt |date("m/d/Y")  }}
+          {{ article.createAt |date("d/m/Y")  }}
         </p>
       </div>
-      <p class="text-center">Categories :</p>
-      <ul>
-        {% for cat in article.categories %}
-        <li>{{ cat.name }}</li>
-        {% endfor %}
-      </ul>
+      <div class="flex">
+        <p class="text-center">Categories :&nbsp;</p>
+        <ul class="flex gap-2 flex-wrap">
+          {% for cat in article.categories %}
+          <li>{{ cat.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     </footer>
   </article>
   {% endfor %}

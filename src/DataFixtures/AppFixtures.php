@@ -47,6 +47,8 @@ class AppFixtures extends Fixture
             ->setContent($faker->realText())
             ->setCreateAt($faker->dateTime())
             ->setTitle($faker->word())
+            ->addCategory($categories[$faker->numberBetween(0,29)])            
+            ->addCategory($categories[$faker->numberBetween(0,29)])
             ->addCategory($categories[$faker->numberBetween(0,29)]);
     
             $manager->persist($article);
