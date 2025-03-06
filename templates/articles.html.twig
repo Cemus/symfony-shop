@@ -26,14 +26,14 @@
           {{ article.createAt |date("d/m/Y")  }}
         </p>
       </div>
-      <div class="flex">
-        <p class="text-center">Categories :&nbsp;</p>
-        <ul class="flex gap-2 flex-wrap">
-          {% for cat in article.categories %}
-          <li>{{ cat.name }}</li>
-          {% endfor %}
-        </ul>
-      </div>
+
+      <ul class="flex gap-1 justify-center">
+        {% for cat in article.categories %} {% if loop.last %}
+        <li>{{ cat.name }}</li>
+        {% else %}
+        <li>{{ cat.name }} -</li>
+        {% endif %} {% endfor %}
+      </ul>
     </footer>
   </article>
   {% endfor %}
