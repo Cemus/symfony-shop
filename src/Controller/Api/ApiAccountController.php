@@ -54,8 +54,7 @@ class ApiAccountController extends AbstractController
             $code = 400;
         }
 
-        if (!$this->accountRepository->findOneBy(
-            ["email" => $account->getEmail()])) {
+        if (!$this->accountRepository->findOneBy(["email" => $account->getEmail()])) {
             $this->em->persist($account);
             $this->em->flush();
             $code = 201;
@@ -68,6 +67,6 @@ class ApiAccountController extends AbstractController
         return $this->json($account, $code, [
             "Access-Control-Allow-Origin" => "*",
             "Content-Type" => "application/json"
-        ], []);
+        ], ['groups' => ['account:read']]);
     }
 }

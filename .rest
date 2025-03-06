@@ -2,9 +2,9 @@ POST https://localhost:8000/api/add-account HTTP/1.1
 content-type: application/json
 
 {
-    "firstname": "Jean",
+    "firstname": "",
     "lastname": "Petit",    
-    "email": "jean-petit@hotmail.fr",
+    "email": "marie-petit@hotmail.fr",
     "password": "1234",
-    "roles": "Plombier"
+    "roles": "utilisateur"
 }
