@@ -50,21 +50,24 @@ class ApiAccountController extends AbstractController
         $account = $this->serializer->deserialize($request, Account::class, 'json');
 
         if ( empty($account->getFirstname()) || empty($account->getLastname()) || empty($account->getEmail()) || empty($account->getPassword()) || empty($account->getRoles())) {
-            $account = "Pas assez d'informations données lors de l'ajout du compte...";
+            $message = "Pas assez d'informations données lors de l'ajout du compte...";
             $code = 400;
         }
 
         if (!$this->accountRepository->findOneBy(["email" => $account->getEmail()])) {
+            $message = "Le compte de " . $account->getFirstname() . $account->getLastname() . " a été crée avec succès !!!1!";
             $this->em->persist($account);
             $this->em->flush();
             $code = 201;
         } 
         else  {
-            $account = "Le compte existe déjà";
+            $message = "Le compte existe déjà";
             $code = 400;
         }
 
-        return $this->json($account, $code, [
+        $data = $code === 201 ? ["account" => $account, "message"=> $message] : ["message"=> $message];
+
+        return $this->json($data, $code, [
             "Access-Control-Allow-Origin" => "*",
             "Content-Type" => "application/json"
         ], ['groups' => ['account:read']]);
