@@ -81,6 +81,11 @@ class ApiAccountController extends AbstractController
 
     # ↓ ###################################################### ICI ################################################################ ↓ #
 
+    # à check : 
+    # - Protection contre les mauvais types de données
+    # - Findby plutôt que findAll -> traitement
+    # - Check le mdp précédent lors du changement de mdp
+
     #[Route(path: '/api/up-account', name: 'api_account_update', methods: ['PUT'])]
     public function updateAccount(Request $request): Response
     {
