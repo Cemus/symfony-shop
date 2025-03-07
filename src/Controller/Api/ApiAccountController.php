@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Account;
 use App\Repository\AccountRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ class ApiAccountController extends AbstractController
 {
     public function __construct(
         private AccountRepository $accountRepository,
+        private ArticleRepository $articleRepository,
         private readonly EntityManagerInterface $em,
         private readonly SerializerInterface $serializer
     ) {
@@ -91,13 +93,51 @@ class ApiAccountController extends AbstractController
             $prevAccount->setFirstname($newData->getFirstname())->setLastname($newData->getLastname());
             $message = "Le compte de " . $prevAccount->getFirstname() . $prevAccount->getLastname() . " a été modifié avec succès !!!1!";
             $this->em->flush();
-            $code = 201;
+            $code = 202;
         } else {
             $message = "Le compte n'existe pas";
             $code = 400;
         }
 
-        $data = $code === 201 ? ["account" => $prevAccount, "message" => $message] : ["message" => $message];
+        $data = $code === 202 ? ["account" => $prevAccount, "message" => $message] : ["message" => $message];
+
+        return $this->json($data, $code, [
+            "Access-Control-Allow-Origin" => "*",
+            "Content-Type" => "application/json"
+        ], ['groups' => ['account:read']]);
+    }
+
+    #[Route(path: '/api/delete-account', name: 'api_account_delete', methods: ['DELETE'])]
+    public function deleteAccount(Request $request): Response
+    {
+        $request = $request->getContent();
+        $data = json_decode($request, true);
+        if (empty($data["id"])) {
+            $message = "Besoin d'un id...";
+            $code = 400;
+        }
+
+        $account = $this->accountRepository->findOneBy(["id" => $data["id"]]);
+
+        if (!empty($account)) {
+            $articles = $this->articleRepository->findAll();
+            $removedArticles = 0;
+            foreach ($articles as $article) {
+                if ($article->getAuthor()->getId() == $account->getId()) {
+                    $this->em->remove($article);
+                    $removedArticles++;
+                }
+            }
+            $message = "Le compte de " . $account->getFirstname() . $account->getLastname() . " a été supprimé avec succès !!!1! | " . $removedArticles . " articles supprimés durant l'opération.";
+            $this->em->remove($account);
+            $this->em->flush();
+            $code = 202;
+        } else {
+            $message = "Le compte n'existe pas";
+            $code = 400;
+        }
+
+        $data = $code === 202 ? ["account" => $account, "message" => $message] : ["message" => $message];
 
         return $this->json($data, $code, [
             "Access-Control-Allow-Origin" => "*",

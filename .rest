@@ -1,5 +1,12 @@
-### Update account
+### Delete account
+DELETE https://localhost:8000/api/delete-account HTTP/1.1
+content-type: application/json
 
+{
+    "id":79
+}
+
+### Update account
 PUT https://localhost:8000/api/up-account HTTP/1.1
 content-type: application/json
 
