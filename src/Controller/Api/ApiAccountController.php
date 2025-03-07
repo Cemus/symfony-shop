@@ -78,6 +78,9 @@ class ApiAccountController extends AbstractController
         ], ['groups' => ['account:read']]);
     }
 
+
+    # ↓ ###################################################### ICI ################################################################ ↓ #
+
     #[Route(path: '/api/up-account', name: 'api_account_update', methods: ['PUT'])]
     public function updateAccount(Request $request): Response
     {
