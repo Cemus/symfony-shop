@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
-use function PHPUnit\Framework\isEmpty;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class ApiAccountController extends AbstractController
 {
@@ -19,7 +20,8 @@ class ApiAccountController extends AbstractController
         private AccountRepository $accountRepository,
         private ArticleRepository $articleRepository,
         private readonly EntityManagerInterface $em,
-        private readonly SerializerInterface $serializer
+        private readonly SerializerInterface $serializer,
+        private readonly UserPasswordHasherInterface $passwordHasher
     ) {
     }
 
@@ -89,17 +91,16 @@ class ApiAccountController extends AbstractController
 
         $prevAccount = $this->accountRepository->findOneBy(["email" => $newData->getEmail()]);
         if (!empty($prevAccount)) {
-
             $prevAccount->setFirstname($newData->getFirstname())->setLastname($newData->getLastname());
             $message = "Le compte de " . $prevAccount->getFirstname() . $prevAccount->getLastname() . " a été modifié avec succès !!!1!";
             $this->em->flush();
-            $code = 202;
+            $code = 200;
         } else {
             $message = "Le compte n'existe pas";
             $code = 400;
         }
 
-        $data = $code === 202 ? ["account" => $prevAccount, "message" => $message] : ["message" => $message];
+        $data = $code === 200 ? ["account" => $prevAccount, "message" => $message] : ["message" => $message];
 
         return $this->json($data, $code, [
             "Access-Control-Allow-Origin" => "*",
@@ -131,17 +132,54 @@ class ApiAccountController extends AbstractController
             $message = "Le compte de " . $account->getFirstname() . $account->getLastname() . " a été supprimé avec succès !!!1! | " . $removedArticles . " articles supprimés durant l'opération.";
             $this->em->remove($account);
             $this->em->flush();
-            $code = 202;
+            $code = 200;
         } else {
             $message = "Le compte n'existe pas";
             $code = 400;
         }
 
-        $data = $code === 202 ? ["account" => $account, "message" => $message] : ["message" => $message];
+        $data = $code === 200 ? ["account" => $account, "message" => $message] : ["message" => $message];
 
         return $this->json($data, $code, [
             "Access-Control-Allow-Origin" => "*",
             "Content-Type" => "application/json"
         ], ['groups' => ['account:read']]);
     }
+
+    #[Route(path: '/api/pswd-account', name: 'api_account_pswd', methods: ['PATCH'])]
+    public function changePassword(Request $request): Response
+    {
+        $request = $request->getContent();
+        $newData = $this->serializer->deserialize($request, Account::class, 'json');
+
+        if (empty($newData->getPassword()) || empty($newData->getEmail())) {
+            $message = "Besoin d'un password et d'une mail...";
+            $code = 400;
+        }
+
+        $account = $this->accountRepository->findOneBy(["email" => $newData->getEmail()]);
+
+        if (!empty($account)) {
+
+            $newPassword = $newData->getPassword();
+            $hashedPassword = $this->passwordHasher->hashPassword($account, $newPassword);
+            $account->setPassword($hashedPassword);
+
+            $this->em->flush();
+
+            $message = "Le compte de " . $account->getFirstname() . $account->getLastname() . " a été modifié avec succès !!!1!";
+            $code = 202;
+        } else {
+            $message = "Le compte n'existe pas";
+            $code = 400;
+        }
+
+        $data = $code === 200 ? ["account" => $account, "message" => $message] : ["message" => $message];
+
+        return $this->json($data, $code, [
+            "Access-Control-Allow-Origin" => "*",
+            "Content-Type" => "application/json"
+        ], ['groups' => ['account:read']]);
+    }
+
 }

@@ -1,4 +1,14 @@
-### Delete account
+### PATCH account
+PATCH https://localhost:8000/api/pswd-account HTTP/1.1
+content-type: application/json
+
+{
+    "email":"fzefvfvev-petit@hotmail.fr",
+    "password":"9595zefzefzef"
+}
+
+
+### DELETE account
 DELETE https://localhost:8000/api/delete-account HTTP/1.1
 content-type: application/json
 
@@ -6,7 +16,7 @@ content-type: application/json
     "id":79
 }
 
-### Update account
+### UPDATE account
 PUT https://localhost:8000/api/up-account HTTP/1.1
 content-type: application/json
 
@@ -16,7 +26,7 @@ content-type: application/json
     "email":"margaux.ferreira@sfr.fr"
 }
 
-### Post article
+### POST article
 POST https://localhost:8000/api/add-article HTTP/1.1
 content-type: application/json
 

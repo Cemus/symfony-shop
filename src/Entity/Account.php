@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\AccountRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
-class Account
+class Account implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,7 +21,7 @@ class Account
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['account:read',"article:read"])]
+    #[Groups(['account:read', "article:read"])]
 
     private ?string $lastname = null;
 
@@ -99,4 +100,5 @@ class Account
 
         return $this;
     }
+
 }
