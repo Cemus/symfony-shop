@@ -1,18 +1,12 @@
-POST https://localhost:8000/api/add-article HTTP/1.1
+### Update account
+
+PUT https://localhost:8000/api/up-account HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Article n°6",
-    "content": "Petit",
-    "author":{
-        "firstname":"Audrey",
-        "lastname":"Rousseau",
-        "email":"hhamel@live.com"
-    },
-    "categories":[
-    {"name":"soluta"},
-    {"name":"ipsam"}
-    ]
+    "firstname":"Margaux",
+    "lastname":"Ferreira",
+    "email":"margaux.ferreira@sfr.fr"
 }
 
 ### Post article
