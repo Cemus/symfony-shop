@@ -170,7 +170,7 @@ class ApiAccountController extends AbstractController
 
             $this->em->flush();
 
-            $message = "Le compte de " . $account->getFirstname() . $account->getLastname() . " a été modifié avec succès !!!1!";
+            $message = "Le mot de passe de " . $account->getFirstname() . $account->getLastname() . " a été modifié avec succès !!!1!";
             $code = 202;
         } else {
             $message = "Le compte n'existe pas";
