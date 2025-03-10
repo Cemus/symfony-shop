@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\CategoryRepository;
@@ -26,12 +28,29 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/add-category', name: 'app_add_category')]
-    public function addCategory(): Response
+    public function addCategory(Request $request): Response
     {
-        $form = $this->createForm(CategoryType::class);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class,$category );
+        $form->handleRequest($request);
+        $msg = "";
+        $status= "";
 
-        return $this->render('addCategory.html.twig',[
-            'form' => $form // ->createView() ; facultatif
+        if($form->isSubmitted()){
+            try {
+                $this->em->persist($category);
+                $this->em->flush();
+                $msg = "La catégorie a été ajoutée avec succès";
+                $status = "success";
+            } catch (\Exception $e) {
+                $msg ="La catégorie existe déja";
+                $status = "danger";
+            }
+        }
+        $this->addFlash($status, $msg);
+        return $this->render('addCategory.html.twig',
+        [
+            'form'=> $form // ->createView() ; optionnel
         ]);
     }
 }

@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %} {% block title %}Ajouter une catégorie - Super
-Site{% endblock %} {% block body %}
+Site {% endblock %} {% block body %}
 
-<main>
-  {{ form }}
+<main class="flex flex-col flex-1 items-center justify-center">
+  <turbo-frame id="id-category">
+    <div>
+      {{ form_start(form) }}
+      <div class="text-red-500 bold">
+        {{ form_errors(form) }}
+      </div>
+      {{ form_end(form) }}
+    </div>
+    {% include 'layout/_toast.html.twig' %}
+  </turbo-frame>
 </main>
 
 {% endblock %}
