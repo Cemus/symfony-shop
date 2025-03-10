@@ -101,4 +101,8 @@ class Account implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function __tostring():string{
+        return $this->getFirstname() . " " . $this->getLastname();
+    }
+
 }

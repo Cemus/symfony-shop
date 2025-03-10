@@ -126,4 +126,8 @@ class Article
 
         return $this;
     }
+
+    public function __tostring():string{
+        return $this->getTitle();
+    }
 }
