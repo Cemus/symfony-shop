@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,10 @@ final class CategoryController extends AbstractController
     #[Route('/add-category', name: 'app_add_category')]
     public function addCategory(): Response
     {
+        $form = $this->createForm(CategoryType::class);
 
-        return $this->render('addCategory.html.twig');
+        return $this->render('addCategory.html.twig',[
+            'form' => $form // ->createView() ; facultatif
+        ]);
     }
 }
