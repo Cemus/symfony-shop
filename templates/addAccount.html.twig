@@ -5,6 +5,32 @@
   <turbo-frame id="id-account">
     <div>
       {{ form_start(form) }}
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.lastname) }}
+        {{ form_widget(form.lastname) }}
+      </div>
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.firstname) }}
+        {{ form_widget(form.firstname) }}
+      </div>
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+      </div>
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.password.first) }}
+        {{ form_widget(form.password.first) }}
+      </div>
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.password.second) }}
+        {{ form_widget(form.password.second) }}
+      </div>
+      <div class="flex flex-col justify-center">
+        {{ form_label(form.roles) }}
+        {{ form_widget(form.roles) }}
+      </div>
+      <br />
+      {{ form_label(form.save) }}
       {{ form_end(form) }}
     </div>
     {% include 'layout/_toast.html.twig' %}

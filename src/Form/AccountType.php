@@ -6,6 +6,7 @@ use App\Entity\Account;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,11 +35,16 @@ class AccountType extends AbstractType
                     'placeholder' => 'Saisir votre adresse mail'
                 ]
             ])
-            ->add('password', PasswordType::class,[
-                'label' => 'Mot de passe',
+            ->add('password', RepeatedType::class,[
+                'first_options' => ['label' => 'Mot de passe',
                 'attr'=>[
-                    'placeholder' => 'Saisir votre mot de passe'
-                ]
+                    'placeholder' => 'Saisir le mot de passe'
+                ]],
+                'second_options' => ['label' => 'Confirmer le mot de passe',
+                'attr'=>[
+                    'placeholder' => 'Saisir le mot de passe'
+                ]]
+                
             ])
             ->add('roles', TextType::class,[
                 'label' => 'Rôle',
@@ -47,7 +53,10 @@ class AccountType extends AbstractType
                 ]
             ])   
             ->add('save',SubmitType::class,[
-                'label' => 'Soumettre le compte'
+                'label' => 'Soumettre le compte',
+                'attr'=>[
+                    'class' => 'bg-green-500 text-white px-2 py-1 rounded-md hover:px-3 hover:py-2 hover:bg-green-400'
+                ]
             ]);
     }
 

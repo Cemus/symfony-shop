@@ -14,15 +14,18 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class,[
-                'label'=> 'Nom de la catégorie',
-                'attr'=>[
-                    'placeholder'=>'Saisir le nom de la catégorie'
+            ->add('name', TextType::class, [
+                'label' => 'Nom de la catégorie',
+                'attr' => [
+                    'placeholder' => 'Saisir le nom de la catégorie'
                 ]
-            ])->add('save',SubmitType::class,[
-                'label' => 'Soumettre la catégorie'
-            ])
-            ;
+            ])->add('save', SubmitType::class, [
+                    'label' => 'Soumettre la catégorie',
+                    'attr' => [
+                        'class' => 'bg-green-500 text-white px-2 py-1 rounded-md hover:px-3 hover:py-2 hover:bg-green-400'
+                    ]
+                ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
