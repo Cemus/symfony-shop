@@ -48,9 +48,7 @@ class AccountType extends AbstractType
             ])   
             ->add('save',SubmitType::class,[
                 'label' => 'Soumettre le compte'
-            ])
-            ;
-                 ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
