@@ -47,7 +47,7 @@ final class AccountController extends AbstractController
 
                 $this->em->persist($account);
                 $this->em->flush();
-                
+        
                 $msg = "Le compte a été ajouté avec succès";
                 $status = "success";
             } catch (\Exception $e) {

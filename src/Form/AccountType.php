@@ -19,7 +19,7 @@ class AccountType extends AbstractType
             ->add('firstname', TextType::class,[
                 'label' => 'Prénom',
                 'attr'=>[
-                    'placeholder' => 'Saisir votre prénom'
+                    'placeholder' => 'Saisir votre prénom',
                 ]
             ])
             ->add('lastname', TextType::class,[
