@@ -28,6 +28,6 @@ final class CategoryController extends AbstractController
     public function addCategory(): Response
     {
 
-        return $this->render('add-categories.html.twig');
+        return $this->render('addCategory.html.twig');
     }
 }
