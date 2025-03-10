@@ -21,4 +21,11 @@ final class CategoryController extends AbstractController
             'categories' => $this->categoryRepository->findAll(),
         ]);
     }
+
+    #[Route('/add-category', name: 'app_add-category')]
+    public function addCategory(): Response
+    {
+
+        return $this->render('add-categories.html.twig');
+    }
 }

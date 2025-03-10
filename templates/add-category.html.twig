@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %} {% block title %}Ajouter une catégorie - Super
+Site{% endblock %} {% block body %}
+
+<main>
+  {% for cat in categories %}
+  <p>{{ cat.id }}</p>
+  {% endfor %}
+</main>
+
+{% endblock %}
