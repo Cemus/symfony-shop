@@ -31,7 +31,7 @@ class AccountType extends AbstractType
             ->add('email', EmailType::class,[
                 'label' => 'Courriel',
                 'attr'=>[
-                    'placeholder' => 'Saisir votre addresse mail'
+                    'placeholder' => 'Saisir votre adresse mail'
                 ]
             ])
             ->add('password', PasswordType::class,[
