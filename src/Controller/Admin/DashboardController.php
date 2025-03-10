@@ -34,13 +34,13 @@ class DashboardController extends AbstractDashboardController
     #[Route(path: "/admin/article", name: "app_admin_article")]
     public function article(): Response
     {
-        $url = $this->adminUrlGenerator->setController(AccountCrudController::class)->generateUrl();
+        $url = $this->adminUrlGenerator->setController(ArticleCrudController::class)->generateUrl();
         return $this->redirect($url);
     }
 
     public function index(): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render(view: 'admin/dashboard.html.twig');
 
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
@@ -67,7 +67,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Revival');
+            ->setTitle('Symfony shop')
+            ->setFaviconPath('favicon.svg');
+
     }
 
     public function configureMenuItems(): iterable
@@ -78,8 +80,8 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Accounts', 'fa fa-user', Account::class),
 
             MenuItem::section('Articles'),
-            MenuItem::linkToCrud('Articles', 'fa fa-file-lines', Article::class),
-            MenuItem::linkToCrud('Categories', 'fa fa-table', Category::class),
+            MenuItem::linkToCrud('Articles', 'fa fa-newspaper', Article::class),
+            MenuItem::linkToCrud('Categories', 'fa fa-table-list', Category::class),
 
         ];
     }

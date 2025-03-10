@@ -1,11 +1,14 @@
-{% extends '@EasyAdmin/page/content.html.twig' %} {% block content %}
-<main class="flex flex-col justify-between">
-  <header class="flex">
-    <h1>Bienvenue sur mon dashboard top secret 🕵️‍♂️</h1>
-  </header>
+{% extends '@EasyAdmin/page/content.html.twig'%} {% block head %}
+<link rel="stylesheet" href="{{ asset('styles/tailwind.css') }}" />
+
+{% endblock %} {% block content %}
+
+<main class="flex flex-col gap-4 text-2xl">
+  <h2 class="my-2 text-xl my-2">Bienvenue sur mon dashboard top secret 🕵️‍♂️</h2>
+
   <article class="">
     <p>Au menu :</p>
-    <ul>
+    <ul class="bg-red-500">
       <li><a href="/admin/account">Comptes</a></li>
       <li><a href="/admin/article">Articles</a></li>
       <li><a href="/admin/category">Categories</a></li>
