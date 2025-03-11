@@ -16,7 +16,7 @@ class WeatherService
     }
     public function fetchWeather(): array
     {
-        $url = 'https://api.openweathermap.org/data/2.5/weather?lon=1.44&lat=43.6&appid=' . $this->getKey();
+        $url = 'https://api.openweathermap.org/data/2.5/weather?lon=1.44&lat=43.6&appid=' . $this->getKey() . "&units=metric" . "&lang=fr";
         $response = $this->httpClient->request(
             'GET',
             $url
