@@ -7,6 +7,7 @@ use App\Form\AccountType;
 use App\Repository\AccountRepository;
 use App\Service\AccountService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +26,33 @@ final class AccountController extends AbstractController
     }
 
     #[Route('/accounts', name: 'app_accounts')]
-    public function showAllCategories(): Response
+    public function showAllAccounts(): Response
     {
-
+        $errorMsg = "";
+        $accounts = [];
+        try {
+            $accounts = $this->accountService->getAll();
+        } catch (Exception $e) {
+            $errorMsg = $e->getMessage();
+        }
         return $this->render('accounts.html.twig', [
-            'accounts' => $this->accountRepository->findAll(),
+            'accounts' => $accounts,
+            'errorMsg' => $errorMsg ?? null
+        ]);
+    }
+
+    #[Route('/account-id/{id}', name: 'app_account_id')]
+    public function showById(int $id): Response
+    {
+        $errorMsg = "";
+        try {
+            $account = $this->accountService->getById($id);
+        } catch (Exception $e) {
+            $errorMsg = $e->getMessage();
+        }
+        return $this->render('accountId.html.twig', [
+            'account' => $account ?? null,
+            'errorMsg' => $errorMsg ?? null
         ]);
     }
 
@@ -47,7 +70,7 @@ final class AccountController extends AbstractController
                 $this->accountService->save($account);
                 $msg = "Le compte a été ajouté avec succès";
                 $status = "success";
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $msg = "Le compte existe déja";
                 $status = "danger";
             }

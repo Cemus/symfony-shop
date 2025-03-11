@@ -16,7 +16,7 @@ class AccountService
     }
 
 
-    public function save(Account $account)
+    public function save(Account $account): void
     {
         if (
             $account->getFirstname() != "" && $account->getLastname() != "" && $account->getEmail() != "" &&
@@ -32,5 +32,27 @@ class AccountService
         } else {
             throw new \Exception("Les champs ne sont pas tous remplis");
         }
+    }
+
+    public function getAll(): array
+    {
+        $accounts = [];
+
+        $accounts = $this->accountRepository->findAll();
+        if ($accounts == []) {
+            throw new \Exception("Aucun compte trouvé", 204);
+        }
+
+        return $accounts;
+    }
+
+    public function getById($id): Account|null
+    {
+        $account = $this->accountRepository->find($id);
+        if ($account == "") {
+            throw new \Exception("Aucun compte trouvé", 204);
+        }
+
+        return $account;
     }
 }

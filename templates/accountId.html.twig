@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
-{% block title %}Comptes - Super Site
+{% block title %}Compte spécifique - Super Site
 {% endblock
 %}
 {% block body %}
 
 	<main class="grid grid-cols-3 gap-2 p-2">
-		{% for account in accounts %}
-			<article class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full">
+		<article class="flex flex-col justify-between border-2 border-cyan-300 p-2 h-48 w-full">
+			{% if account != null %}
 				<header>
 					<h2>
 						<span>{{ account.firstname }}</span>
@@ -22,12 +22,9 @@
 						<span>{{ account.email }}</span>
 					</p>
 				</footer>
-
-				{% if errorMsg is defined %}
-					<p class="text-red-500">{{ errorMsg }}</p>
-				{% endif %}
-
-			</article>
-		{% endfor %}
+			{% else %}
+				<p class="text-red-500">{{ errorMsg }}</p>
+			{% endif %}
+		</article>
 	</main>
 {% endblock %}
