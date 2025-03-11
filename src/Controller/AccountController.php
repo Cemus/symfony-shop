@@ -45,11 +45,13 @@ final class AccountController extends AbstractController
     public function showById(int $id): Response
     {
         $errorMsg = "";
+
         try {
             $account = $this->accountService->getById($id);
         } catch (Exception $e) {
             $errorMsg = $e->getMessage();
         }
+
         return $this->render('accountId.html.twig', [
             'account' => $account ?? null,
             'errorMsg' => $errorMsg ?? null
